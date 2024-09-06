@@ -2,7 +2,7 @@ name: Daily Bing Wallpaper to Feishu
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # 每天 10 点运行
+    - cron: '*/5 * * * *'  # 每五分钟运行一次
   workflow_dispatch:  # 允许手动触发
 
 jobs:
@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # 确保检出代码
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
