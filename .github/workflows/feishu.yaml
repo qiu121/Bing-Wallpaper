@@ -1,0 +1,26 @@
+name: Daily Bing Wallpaper to Feishu
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 每天 10 点运行
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  send_bing_wallpaper:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install requests requests-toolbelt
+
+    - name: Run script
+      run: python main.py
+      env:
+        FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+        FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+        FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
