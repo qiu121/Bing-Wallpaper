@@ -18,11 +18,20 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Set up virtual environment
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+
     - name: Install dependencies
-      run: pip install requests requests-toolbelt
+      run: |
+        source venv/bin/activate
+        pip install -r requirements.txt
 
     - name: Run script
-      run: python main.py
+      run: |
+        source venv/bin/activate
+        python main.py
       env:
         FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
         FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
