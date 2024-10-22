@@ -1,6 +1,10 @@
 import requests
 import json
 import os
+import time
+import hashlib
+import base64
+import hmac
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from typing import Optional, Tuple
 
@@ -8,6 +12,7 @@ from typing import Optional, Tuple
 FEISHU_APP_ID = os.getenv('FEISHU_APP_ID')
 FEISHU_APP_SECRET = os.getenv('FEISHU_APP_SECRET')
 FEISHU_WEBHOOK_URL = os.getenv('FEISHU_WEBHOOK_URL')
+FEISHU_SIGNING_KEY = os.getenv('FEISHU_SIGNING_KEY')  # 签名密钥
 
 BING_URL = 'https://bing.com'
 BING_API = f'{BING_URL}/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
@@ -40,10 +45,25 @@ def upload_image(image_url: str, access_token: str) -> Optional[str]:
     return image_key
 
 
+def calculate_signature(timestamp: str, secret: str) -> str:
+    # 计算签名字符串：timestamp + "\n" + 密钥
+    to_sign = f'{timestamp}\n{secret}'
+    hmac_code = hmac.new(to_sign.encode('utf-8'), digestmod=hashlib.sha256).digest()
+    # 对结果进行base64处理
+    return base64.b64encode(hmac_code).decode('utf-8')
+
+
 def send_to_feishu(image_url: str, image_description: str, image_title: str, access_token: str) -> dict:
+    # 获取当前时间戳
+    timestamp = str(int(time.time()))
+    # 计算签名
+    sign = calculate_signature(timestamp, FEISHU_SIGNING_KEY)
+
     headers = {'Content-Type': 'application/json'}
     image_key = upload_image(image_url, access_token)
     data = {
+        "timestamp": f'{timestamp}',
+        "sign": f'{sign}',
         "msg_type": "post",
         "content": {
             "post": {
