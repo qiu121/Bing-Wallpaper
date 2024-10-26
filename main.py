@@ -5,6 +5,7 @@ import time
 import hashlib
 import base64
 import hmac
+from datetime import datetime, timezone
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from typing import Optional, Tuple
 
@@ -17,10 +18,16 @@ FEISHU_SIGNING_KEY = os.getenv('FEISHU_SIGNING_KEY')  # 签名密钥
 BING_URL = 'https://bing.com'
 BING_API = f'{BING_URL}/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
 
+# 获取当前时间，并设置为本地时区
+current_time = datetime.now(timezone.utc).astimezone()
+# 格式化为 年-月-日 时:分:秒 时区格式
+print(current_time.strftime('%Y-%m-%d %H:%M:%S %Z %z'))
 
 def get_bing_wallpaper() -> Tuple[Optional[str], Optional[str], Optional[str]]:
     response = requests.get(BING_API)
     data = response.json()
+    print(json.dumps(data, ensure_ascii=False, indent=2))  # 打印标准 JSON 格式
+
     if data and 'images' in data:
         image_info = data['images'][0]
         image_url = BING_URL + image_info['url']
@@ -86,6 +93,11 @@ def send_to_feishu(image_url: str, image_description: str, image_title: str, acc
         }
     }
     response = requests.post(FEISHU_WEBHOOK_URL, headers=headers, data=json.dumps(data))
+    full_url = response.request.url
+    print(full_url)
+    print(f'请求方法: {response.request.method}')
+
+    print(json.dumps(response.json(), ensure_ascii=False, indent=2))  # 打印标准 JSON 格式
     return response.json()
 
 
@@ -105,6 +117,9 @@ def main():
     wallpaper_url, wallpaper_description, wallpaper_title = get_bing_wallpaper()
     if wallpaper_url:
         access_token = get_feishu_token()
+        print(f'🔖 {wallpaper_title}')
+        print(f"📝 {wallpaper_description}")
+        print(f"🔗 {wallpaper_url}")
         send_to_feishu(wallpaper_url, wallpaper_description, wallpaper_title, access_token)
 
 
