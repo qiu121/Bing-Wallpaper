@@ -2,9 +2,11 @@ import requests
 import json
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from typing import Optional
-from config import FEISHU_APP_ID, FEISHU_APP_SECRET, FEISHU_WEBHOOK_URL, FEISHU_SIGNING_KEY
-from utils import calculate_signature
 import time
+
+from config import FEISHU_APP_ID, FEISHU_APP_SECRET, FEISHU_WEBHOOK_URL, FEISHU_SIGNING_KEY
+from feishu.signature import calculate_signature
+
 
 def get_feishu_token() -> str:
     token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"

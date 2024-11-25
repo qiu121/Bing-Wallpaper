@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
-from feushu_api import get_feishu_token,send_to_feishu
-from bing_wallpaper import get_bing_wallpaper
+from feishu import get_feishu_token,send_to_feishu
+from wallpaper import get_bing_wallpaper
 
 def main():
     # 获取当前时间，并设置为本地时区

@@ -1,7 +1,9 @@
 import requests
 import json
 from typing import Optional, Tuple
+
 from config import BING_API, BING_URL
+
 
 def get_bing_wallpaper() -> Tuple[Optional[str], Optional[str], Optional[str]]:
     response = requests.get(BING_API)
