@@ -37,3 +37,6 @@ jobs:
         FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
         FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
         FEISHU_SIGNING_KEY: ${{ secrets.FEISHU_SIGNING_KEY }}  # 签名密钥
+
+        DINGTALK_WEBHOOK_URL: ${{ secrets.DINGTALK_WEBHOOK_URL }}
+        DINGTALK_SIGNING_KEY: ${{ secrets.DINGTALK_SIGNING_KEY }}  
