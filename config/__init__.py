@@ -6,6 +6,8 @@ from .settings import (
     DINGTALK_WEBHOOK_URL,
     DINGTALK_SIGNING_KEY,
 
+    WECOME_WEBHOOK_URL,
+
     BING_URL,
     BING_API,
 )

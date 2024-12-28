@@ -9,5 +9,7 @@ FEISHU_SIGNING_KEY = os.getenv('FEISHU_SIGNING_KEY', '')
 DINGTALK_WEBHOOK_URL = os.getenv('DINGTALK_WEBHOOK_URL', '')
 DINGTALK_SIGNING_KEY = os.getenv('DINGTALK_SIGNING_KEY', '')
 
+WECOME_WEBHOOK_URL = os.getenv('WECOME_WEBHOOK_URL', '')
+
 BING_URL = 'https://bing.com'
 BING_API = f'{BING_URL}/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN'
