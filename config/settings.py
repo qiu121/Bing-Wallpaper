@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # 环境变量配置
 FEISHU_APP_ID = os.getenv('FEISHU_APP_ID', '')
