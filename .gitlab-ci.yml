@@ -1,0 +1,24 @@
+stages:
+  - send_bing_wallpaper
+
+send_bing_wallpaper:
+  stage: send_bing_wallpaper
+  image: python:3.12
+  before_script:
+    - python -m venv .venv
+    - source .venv/bin/activate
+    - pip install -r requirements.txt
+  script:
+    - python main.py
+  only:
+    - schedules  # 计划任务触发
+    - web  # 允许通过 GitLab Web 界面手动触发
+  variables:
+    FEISHU_APP_ID: $FEISHU_APP_ID
+    FEISHU_APP_SECRET: $FEISHU_APP_SECRET
+    FEISHU_WEBHOOK_URL: $FEISHU_WEBHOOK_URL
+    FEISHU_SIGNING_KEY: $FEISHU_SIGNING_KEY
+    DINGTALK_WEBHOOK_URL: $DINGTALK_WEBHOOK_URL
+    DINGTALK_SIGNING_KEY: $DINGTALK_SIGNING_KEY
+    WECOME_WEBHOOK_URL: $WECOME_WEBHOOK_URL
+
