@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 
+from slack import send_to_slack_compact
 from wallpaper import get_bing_wallpaper
 from feishu import get_feishu_token, send_to_feishu
 from dingtalk import send_to_dingtalk
@@ -22,6 +23,7 @@ def main():
         send_to_dingtalk(wallpaper_url, wallpaper_title, wallpaper_description)
 
         send_to_wecome(wallpaper_url, wallpaper_title, wallpaper_description)
+        send_to_slack_compact(wallpaper_url, wallpaper_title, wallpaper_description)
 
 
 if __name__ == "__main__":

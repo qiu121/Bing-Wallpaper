@@ -8,6 +8,8 @@ from .settings import (
 
     WECOME_WEBHOOK_URL,
 
+    SLACK_WEBHOOK_URL,
+
     BING_URL,
     BING_API,
 )
