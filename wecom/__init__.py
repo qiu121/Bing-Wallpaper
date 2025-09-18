@@ -1,3 +1,3 @@
 from .wecom_api import (
-    send_to_wecome
+    send_to_wecom
 )

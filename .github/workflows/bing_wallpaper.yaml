@@ -41,5 +41,5 @@ jobs:
         DINGTALK_WEBHOOK_URL: ${{ secrets.DINGTALK_WEBHOOK_URL }}
         DINGTALK_SIGNING_KEY: ${{ secrets.DINGTALK_SIGNING_KEY }}
 
-        WECOME_WEBHOOK_URL: ${{ secrets.WECOME_WEBHOOK_URL }}
+        WECOM_WEBHOOK_URL: ${{ secrets.WECOM_WEBHOOK_URL }}
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -4,7 +4,7 @@ from slack import send_to_slack_compact
 from wallpaper import get_bing_wallpaper
 from feishu import get_feishu_token, send_to_feishu
 from dingtalk import send_to_dingtalk
-from wecom import send_to_wecome
+from wecom import send_to_wecom
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
         send_to_feishu(wallpaper_url, wallpaper_description, wallpaper_title, access_token)
         send_to_dingtalk(wallpaper_url, wallpaper_title, wallpaper_description)
 
-        send_to_wecome(wallpaper_url, wallpaper_title, wallpaper_description)
+        send_to_wecom(wallpaper_url, wallpaper_title, wallpaper_description)
         send_to_slack_compact(wallpaper_url, wallpaper_title, wallpaper_description)
 
 

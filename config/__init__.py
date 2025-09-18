@@ -6,7 +6,7 @@ from .settings import (
     DINGTALK_WEBHOOK_URL,
     DINGTALK_SIGNING_KEY,
 
-    WECOME_WEBHOOK_URL,
+    WECOM_WEBHOOK_URL,
 
     SLACK_WEBHOOK_URL,
 

@@ -1,10 +1,10 @@
 import json
 import requests
 
-from config import WECOME_WEBHOOK_URL
+from config import WECOM_WEBHOOK_URL
 
 
-def send_to_wecome(image_url: str, title: str, description: str) -> dict:
+def send_to_wecom(image_url: str, title: str, description: str) -> dict:
     headers = {"Content-Type": "application/json"}
     # 企业微信的Markdown渲染不支持图片的嵌入;
     # 通过news消息类型生成卡片消息时，图片默认显示在标题下方，描述在最下方,这种消息格式是固定的!!!
@@ -30,7 +30,7 @@ def send_to_wecome(image_url: str, title: str, description: str) -> dict:
     #     }
     # }
 
-    response = requests.post(WECOME_WEBHOOK_URL, data=json.dumps(content), headers=headers)
+    response = requests.post(WECOM_WEBHOOK_URL, data=json.dumps(content), headers=headers)
 
     print(f'Request URL: {response.request.url}')
     print(f'Request Method: {response.request.method}')
